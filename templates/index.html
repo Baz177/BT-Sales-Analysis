@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BT Sales Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            background: url('https://www.transparenttextures.com/patterns/brushed-alum.png'), linear-gradient(180deg, #d0d0d5 0%, #b0b0c0 100%); /* Brushed aluminum texture + light metallic gradient */
+            background-size: cover, cover;
+            background-attachment: fixed;
+            color: #333;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .intro {
+            max-width: 1000px;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 122, 204, 0.3);
+            box-shadow: 0 0 20px rgba(0, 122, 204, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .intro h1 {
+            font-size: 2.8em;
+            color: #007acc; /* Vibrant blue for car accent */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+        }
+        .intro p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+            font-weight: 400;
+        }
+        .content-container {
+            width: 90%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .content-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 1s ease forwards;
+        }
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .content-item:nth-child(1) { animation-delay: 0.2s; }
+        .content-item:nth-child(2) { animation-delay: 0.4s; }
+        .content-item:nth-child(3) { animation-delay: 0.6s; }
+        .content-item:nth-child(4) { animation-delay: 0.8s; }
+        .content-item:nth-child(5) { animation-delay: 1.0s; }
+        .content-item:nth-child(6) { animation-delay: 1.2s; }
+        .content-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #007acc;
+            box-shadow: 0 0 15px rgba(0, 122, 204, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .content-item img:hover {
+            transform: scale(1.02);
+        }
+        .content-item img.error {
+            border: 2px dashed #ff3333;
+            background: rgba(255, 51, 51, 0.1);
+            width: 600px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff3333;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        .content-item p {
+            font-size: 1.4em;
+            color: #333;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="intro">
+        <h1>BT Sales Analysis</h1>
+        <p>This project provides a detailed visualization of key trends and insights derived from BT's car sales data. It leverages a comprehensive dataset of over 200 recorded and documented customer interactions, which was analyzed to explore various factors influencing sales dynamics. The charts below highlight critical findings related to customer behaviors, demographics, and sales patterns, aiming to pinpoint the key drivers of purchases. The visualizations encompass a range of metrics, including credit applications, sales distribution by day, customer ethnicity, reasons for market entry, MaxCare purchase trends, the impact of pre-qualification, gender distribution, and the influence of car transfers</p>
+    </div>
+    <div class="content-container">
+        <div class="content-item">
+            <p>What days are BT's most profitable?</p>
+            <img src="{{ url_for('static', filename='plot_Day.png') }}" alt="Which are days are most profitable?" onerror="this.classList.add('error'); this.src=''; this.innerHTML='Image Not Found';">
+            <p>The weekends are BT's Best Days.</p>
+        </div>
+        <div class="content-item">
+            <p>Which Ethnicity is BT best with?</p>
+            <img src="{{ url_for('static', filename='plot_Ethnicity.png') }}" alt="Which Ethnicity is Basdeo Best with?" onerror="this.classList.add('error'); this.src=''; this.innerHTML='Image Not Found';">
+            <p>BT is best with Africans and almost as good as with Caucasions</p>
+        </div>
+        <div class="content-item">
+            <p>Why are you in the market?</p>
+            <img src="{{ url_for('static', filename='plot_In_Market_Reason.png') }}" alt="Why are you in the market?" onerror="this.classList.add('error'); this.src=''; this.innerHTML='Image Not Found';">
+            <p>Customers who are buying another car are more likely to buy.</p>
+        </div>
+        <div class="content-item">
+            <p>What gender is BT best with?</p>
+            <img src="{{ url_for('static', filename='plot_Sex.png') }}" alt="Who is best with Male or Female?" onerror="this.classList.add('error'); this.src=''; this.innerHTML='Image Not Found';">
+            <p>BT is slightly better selling to men.</p>
+        </div>
+        <div class="content-item">
+            <p>What features are most inidcative of a customer making a purchase?</p>
+            <img src="{{ url_for('static', filename='styled_dataframe.png') }}" alt="What features are most inidcative of a customer making a purchase?" onerror="this.classList.add('error'); this.src=''; this.innerHTML='Image Not Found';">
+            <p>If the customer is interested in MaxCare, Credit Application and PreQual; This is costoomer is ready to buy.</p>
+        </div>
+        <div class="content-item">
+            <p>What factors are the most telling for a customer looking to purchase?</p>
+            <img src="{{ url_for('static', filename='feature_importance.png') }}" alt="What factors are the most telling for a customer looking to purchase?" onerror="this.classList.add('error'); this.src=''; this.innerHTML='Image Not Found';">
+            <p>Credit Application takes the top stop, as well as the day the customer is shopping.</p>
+        </div>
+        <div class="content-item">
+            <p>Disclaimer</p>
+            <p>This BT Sales Analysis page, created on May 14, 2025, provides visualizations and insights derived from BT's car sales data based on over 200 recorded customer interactions. The analysis and charts presented are intended for informational purposes only and reflect the data and methodologies applied at the time of creation. While every effort has been made to ensure accuracy, the information herein should not be considered definitive or exhaustive. Factors such as data limitations, sample size, and analytical assumptions may influence the results. This content is not financial or business advice, and users should consult professional advisors for decision-making. BT and the creators of this analysis are not liable for any decisions or actions taken based on this information. The visualizations, including credit applications, sales distribution by day, customer ethnicity, reasons for market entry, MaxCare purchase trends, pre-qualification impact, gender distribution, and car transfers, are subject to change as new data becomes available.</p>
+    </div>
+</body>
+</html>
